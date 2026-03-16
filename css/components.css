@@ -1,169 +1,81 @@
-/* =========================
-   BUTTON
-========================= */
-
-.btn{
-
-display:inline-block;
-
-padding:14px 28px;
-
-background:#1b63d6;
-color:white;
-
-border-radius:8px;
-
-font-weight:600;
-
-transition:0.2s;
-
-}
-
-.btn:hover{
-
-background:#174fb0;
-
-}
-
-
-/* =========================
-   GRID
-========================= */
+/* GRID */
 
 .grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+margin-top:40px;
+}
 
+.space-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:30px;
-
 margin-top:40px;
-
 }
 
+.program-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px;
+margin-top:40px;
+}
 
-/* =========================
-   CARD
-========================= */
+/* CARD */
 
 .card{
-
 background:white;
-
-border-radius:16px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
+border-radius:14px;
 overflow:hidden;
-
-transition:0.25s;
-
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+transition:0.3s;
 }
 
 .card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:0 20px 40px rgba(0,0,0,0.12);
-
+transform:translateY(-5px);
+box-shadow:0 15px 35px rgba(0,0,0,0.12);
 }
 
 .card img{
-
 height:220px;
 object-fit:cover;
-
 }
 
 .card h3{
-
-padding:20px 20px 10px;
-font-size:20px;
-
+padding:18px 20px 6px;
+font-size:18px;
 }
 
 .card p{
-
 padding:0 20px 20px;
 color:#666;
-
+font-size:14px;
 }
 
+/* BUTTON */
 
-/* =========================
-   SPACE GRID
-========================= */
-
-.space-grid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:40px;
-
-margin-top:60px;
-
-}
-
-
-/* =========================
-   PROGRAM GRID
-========================= */
-
-.program-grid{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:30px;
-
-margin-top:50px;
-
-}
-
-/* =========================
-   Time
-========================= */
-
-.time-slots{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:10px;
-
+.btn{
+display:inline-block;
 margin-top:20px;
-
-}
-
-.time-slot{
-
-padding:12px;
-
-border:1px solid #ddd;
-
-background:white;
-
-border-radius:8px;
-
-cursor:pointer;
-
-}
-
-.time-slot:hover{
-
-border-color:#1b63d6;
-
-}
-
-.time-slot.active{
-
+padding:14px 26px;
 background:#1b63d6;
-
 color:white;
+border-radius:8px;
+font-size:14px;
+}
 
-border-color:#1b63d6;
+/* MOBILE */
+
+@media(max-width:768px){
+
+.grid,
+.space-grid,
+.program-grid{
+grid-template-columns:1fr;
+}
+
+.card img{
+height:200px;
+}
 
 }
