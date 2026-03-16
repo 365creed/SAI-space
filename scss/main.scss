@@ -1,33 +1,4 @@
-/* =========================
-   BASE
-========================= */
-
-@use "base/reset";
-@use "base/variables";
-@use "base/typography";
-
-
-/* =========================
-   LAYOUT
-========================= */
-
-@use "layout/header";
-@use "layout/footer";
-@use "layout/container";
-
-
-/* =========================
-   COMPONENTS
-========================= */
-
-@use "components/buttons";
-@use "components/cards";
-@use "components/grid";
-
-
-/* =========================
-   PAGES
-========================= */
-
-@use "pages/home";
-@use "pages/reservation";
+@use "base";
+@use "layout";
+@use "components";
+@use "reservation";
