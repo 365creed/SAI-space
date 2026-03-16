@@ -1,0 +1,114 @@
+/* =========================
+BUTTON
+========================= */
+
+.btn{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:#1b63d6;
+color:white;
+
+border-radius:8px;
+
+font-weight:600;
+
+transition:.2s;
+
+&:hover{
+
+background:#174fb0;
+
+}
+
+}
+
+
+/* =========================
+CARD
+========================= */
+
+.card{
+
+background:white;
+
+border-radius:16px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+overflow:hidden;
+
+transition:.25s;
+
+&:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
+
+}
+
+img{
+
+height:220px;
+object-fit:cover;
+
+}
+
+h3{
+
+padding:20px 20px 10px;
+
+}
+
+p{
+
+padding:0 20px 20px;
+color:#666;
+
+}
+
+}
+
+
+/* =========================
+GRID
+========================= */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:30px;
+
+margin-top:40px;
+
+}
+
+.space-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:40px;
+
+margin-top:60px;
+
+}
+
+.program-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:30px;
+
+margin-top:50px;
+
+}
