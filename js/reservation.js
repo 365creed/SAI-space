@@ -1,32 +1,24 @@
-const form = document.querySelector("#reservationForm");
+document.addEventListener("DOMContentLoaded",()=>{
 
-if(form){
+const form=document.getElementById("reservationForm");
 
-form.addEventListener("submit", async (e)=>{
+if(!form) return;
+
+form.addEventListener("submit",(e)=>{
 
 e.preventDefault();
 
-const data = {
+const name=form.name.value;
+const phone=form.phone.value;
+const date=form.date.value;
+const time=form.time.value;
 
-name:form.name.value,
-phone:form.phone.value,
-space:form.space.value,
-date:form.date.value,
-time:form.time.value
-
-};
-
-
-if(!data.date || !data.time){
+if(!date||!time){
 
 alert("날짜와 시간을 선택하세요");
-
 return;
 
 }
-
-
-await sendReservation(data);
 
 alert("예약 요청이 접수되었습니다.");
 
@@ -34,4 +26,4 @@ form.reset();
 
 });
 
-}
+});
