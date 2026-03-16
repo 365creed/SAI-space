@@ -36,9 +36,7 @@
 
 
 <section class="page-hero">
-
 <h2>공간 예약</h2>
-
 </section>
 
 
@@ -58,34 +56,32 @@
 
 </select>
 
+
+<input type="date" name="date" required>
+
+
+<!-- 시간 슬롯 -->
 <div id="timeSlots" class="time-slots"></div>
 
-<input type="hidden" name="time">
-  
-<input type="date" name="date">
+<!-- 선택된 시간 저장 -->
+<input type="hidden" name="time" required>
 
-<input type="time" name="time">
 
 <button type="submit">
-
 예약 요청
-
 </button>
 
-<script src="js/calendar.js"></script>
-<script src="js/reservation.js"></script>
-  
 </form>
 
 </section>
 
 
 <footer class="footer">
-
 <p>© SAI Space</p>
-
 </footer>
 
+
+<script src="js/calendar.js"></script>
 <script src="js/reservation.js"></script>
 
 </body>
