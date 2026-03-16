@@ -1,39 +1,33 @@
-const startHour = 9;
-const endHour = 21;
+document.addEventListener("DOMContentLoaded",()=>{
 
-const slotContainer = document.querySelector("#timeSlots");
+const container = document.getElementById("timeSlots");
+if(!container) return;
 
-function createTimeSlots(){
+const start = 9;
+const end = 21;
 
-if(!slotContainer) return;
-
-for(let h=startHour; h<=endHour; h++){
+for(let h=start;h<=end;h++){
 
 let hour = String(h).padStart(2,"0");
 
-let slot = document.createElement("button");
+let btn = document.createElement("button");
 
-slot.className = "time-slot";
+btn.className="time-slot";
+btn.innerText=hour+":00";
 
-slot.innerText = `${hour}:00`;
-
-slot.dataset.time = `${hour}:00`;
-
-slot.addEventListener("click",()=>{
+btn.onclick=()=>{
 
 document.querySelectorAll(".time-slot")
-.forEach(s=>s.classList.remove("active"));
+.forEach(b=>b.classList.remove("active"));
 
-slot.classList.add("active");
+btn.classList.add("active");
 
-document.querySelector("input[name=time]").value = slot.dataset.time;
+document.querySelector("input[name=time]").value=hour+":00";
+
+}
+
+container.appendChild(btn);
+
+}
 
 });
-
-slotContainer.appendChild(slot);
-
-}
-
-}
-
-createTimeSlots();
