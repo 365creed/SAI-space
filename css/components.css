@@ -121,3 +121,49 @@ gap:30px;
 margin-top:50px;
 
 }
+
+/* =========================
+   Time
+========================= */
+
+.time-slots{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:10px;
+
+margin-top:20px;
+
+}
+
+.time-slot{
+
+padding:12px;
+
+border:1px solid #ddd;
+
+background:white;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.time-slot:hover{
+
+border-color:#1b63d6;
+
+}
+
+.time-slot.active{
+
+background:#1b63d6;
+
+color:white;
+
+border-color:#1b63d6;
+
+}
