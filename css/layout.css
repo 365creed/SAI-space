@@ -1,60 +1,54 @@
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
-
 background:white;
 border-bottom:1px solid #eee;
-
 position:sticky;
 top:0;
-z-index:100;
-
+z-index:50;
 }
 
 .header .container{
-
 display:flex;
 justify-content:space-between;
 align-items:center;
-
-padding:20px 0;
+padding:16px 0;
 }
 
 .logo{
-font-size:22px;
+font-size:20px;
 font-weight:700;
-color:#1b63d6;
+color:#111;
 }
 
 .nav a{
-
-margin-left:25px;
-font-weight:500;
-
+margin-left:18px;
+font-size:14px;
 }
 
 .nav a:hover{
-
 color:#1b63d6;
-
 }
 
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 .footer{
-
 margin-top:80px;
 padding:40px 0;
-
+text-align:center;
 background:#111;
 color:white;
-
-text-align:center;
 font-size:14px;
+}
+
+/* MOBILE NAV */
+
+@media(max-width:768px){
+
+.nav{
+display:flex;
+gap:12px;
+font-size:13px;
+}
 
 }
