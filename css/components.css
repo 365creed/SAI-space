@@ -1,1 +1,123 @@
+/* =========================
+   BUTTON
+========================= */
 
+.btn{
+
+display:inline-block;
+
+padding:14px 28px;
+
+background:#1b63d6;
+color:white;
+
+border-radius:8px;
+
+font-weight:600;
+
+transition:0.2s;
+
+}
+
+.btn:hover{
+
+background:#174fb0;
+
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
+
+margin-top:40px;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+background:white;
+
+border-radius:16px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+overflow:hidden;
+
+transition:0.25s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
+
+}
+
+.card img{
+
+height:220px;
+object-fit:cover;
+
+}
+
+.card h3{
+
+padding:20px 20px 10px;
+font-size:20px;
+
+}
+
+.card p{
+
+padding:0 20px 20px;
+color:#666;
+
+}
+
+
+/* =========================
+   SPACE GRID
+========================= */
+
+.space-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:40px;
+
+margin-top:60px;
+
+}
+
+
+/* =========================
+   PROGRAM GRID
+========================= */
+
+.program-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:30px;
+
+margin-top:50px;
+
+}
