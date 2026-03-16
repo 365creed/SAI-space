@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SAI Space | 예약</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/reservation.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="container">
+
+<h1 class="logo">
+<a href="index.html">SAI Space</a>
+</h1>
+
+<nav class="nav">
+<a href="about.html">소개</a>
+<a href="space.html">공간</a>
+<a href="program.html">프로그램</a>
+<a href="reservation.html">예약</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<section class="page-hero">
+
+<h2>공간 예약</h2>
+
+</section>
+
+
+<section class="container">
+
+<form id="reservationForm">
+
+<input type="text" name="name" placeholder="이름" required>
+
+<input type="tel" name="phone" placeholder="연락처" required>
+
+
+<select name="space">
+
+<option value="2F">2층 세미나</option>
+<option value="3F">3층 소모임</option>
+
+</select>
+
+
+<input type="date" name="date">
+
+<input type="time" name="time">
+
+
+<button type="submit">
+
+예약 요청
+
+</button>
+
+</form>
+
+</section>
+
+
+<footer class="footer">
+
+<p>© SAI Space</p>
+
+</footer>
+
+<script src="js/reservation.js"></script>
+
+</body>
+</html>
