@@ -220,3 +220,32 @@ font-size:52px;
 }
 
 }
+
+.hero{
+height:90vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:linear-gradient(
+135deg,
+#0f172a,
+#1e293b,
+#111827
+);
+
+color:white;
+text-align:center;
+}
+
+.hero h2{
+font-size:48px;
+letter-spacing:-1px;
+margin-bottom:12px;
+}
+
+.hero p{
+opacity:.7;
+font-size:16px;
+}
