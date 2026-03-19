@@ -136,6 +136,30 @@ body {
   transform: translateY(-5px);
 }
 
+/* =========================
+   SPACE CARD (고급 느낌)
+========================= */
+.space-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.space-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+.space-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.space-card p {
+  color: rgba(0,0,0,0.6);
+}
 
 
 
