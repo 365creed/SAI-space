@@ -74,44 +74,68 @@ margin-bottom:20px;
    HERO
 ========================= */
 
-.hero{
-height:85vh;
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
-position:relative;
+body {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  background: linear-gradient(180deg, #f8f7f4, #ffffff);
+  color: #1a1a1a;
 }
 
-.hero::after{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
+/* HERO */
+.hero {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.hero-inner{
-position:relative;
-z-index:2;
-max-width:500px;
+.hero h1 {
+  font-size: 64px;
+  letter-spacing: -1px;
 }
 
-.hero h2{
-font-size:42px;
-margin-bottom:10px;
+.hero p {
+  margin-top: 10px;
+  color: rgba(0,0,0,0.6);
 }
 
-.hero p{
-font-size:16px;
-margin-bottom:24px;
-line-height:1.6;
+/* 버튼 */
+.btn-primary {
+  background: #111;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
 }
+
+.btn-ghost {
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  padding: 14px 28px;
+  border-radius: 999px;
+}
+
+/* 카드 */
+.space-preview {
+  display: flex;
+  gap: 20px;
+  padding: 60px;
+}
+
+.card {
+  flex: 1;
+  padding: 40px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
 
 
 
