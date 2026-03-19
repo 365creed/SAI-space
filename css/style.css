@@ -273,3 +273,56 @@ margin-bottom:12px;
 opacity:.7;
 font-size:16px;
 }
+
+/* =========================
+   HERO V2 (핵심)
+========================= */
+.hero-v2 {
+  position: relative;
+  height: 80vh;
+  background: linear-gradient(120deg, #f5f3ef, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.03), transparent);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.hero-sub {
+  margin-top: 10px;
+  color: rgba(0,0,0,0.6);
+}
+
+/* 버튼 */
+.btn-main {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 32px;
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.btn-sub {
+  margin-left: 10px;
+  padding: 14px 32px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+}
+
