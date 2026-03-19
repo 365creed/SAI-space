@@ -3,3 +3,10 @@ if (localStorage.getItem("admin") !== "true") {
   alert("접근 불가");
   location.href = "/";
 }
+
+<h2>회원번호 생성</h2>
+
+<input type="text" id="name" placeholder="이름">
+<button onclick="createMember()">생성</button>
+
+<ul id="memberList"></ul>
