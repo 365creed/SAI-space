@@ -6,15 +6,14 @@ console.log("SAI Space Loaded");
 ========================= */
 
 const links = document.querySelectorAll(".nav a");
+const currentFile =
+  window.location.pathname.split(/[/\\]/).filter(Boolean).pop() || "index.html";
 
-links.forEach(link => {
-
-if(link.href === window.location.href){
-
-link.style.color = "#1b63d6";
-
-}
-
+links.forEach((link) => {
+  const href = link.getAttribute("href");
+  if (href && (href === currentFile || (currentFile === "" && href === "index.html"))) {
+    link.style.color = "#1b63d6";
+  }
 });
 
 
