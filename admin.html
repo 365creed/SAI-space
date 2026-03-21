@@ -1,12 +1,58 @@
-// admin.js
-if (localStorage.getItem("admin") !== "true") {
-  alert("접근 불가");
-  location.href = "/";
-}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAI Space | 관리자</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <h1 class="logo"><a href="index.html">SAI Space Admin</a></h1>
+    <nav class="nav">
+      <a href="index.html">홈</a>
+      <a href="reservation.html">예약</a>
+      <a href="program.html">프로그램</a>
+      <a href="#" onclick="logout()">로그아웃</a>
+    </nav>
+  </div>
+</header>
 
-<h2>회원번호 생성</h2>
+<section class="page-hero">
+  <h2>관리자 운영 페이지</h2>
+  <p>회원가입 승인/회원번호 발급과 프로그램 운영 일정을 관리합니다.</p>
+</section>
 
-<input type="text" id="name" placeholder="이름">
-<button onclick="createMember()">생성</button>
+<section class="container grid" style="margin-top:20px;">
+  <div class="card card-body">
+    <h3>회원번호 발급</h3>
+    <input type="text" id="memberName" placeholder="회원 이름">
+    <input type="text" id="memberPhone" placeholder="연락처 (선택)" style="margin-top:8px;">
+    <button class="btn" style="margin-top:10px;" onclick="createMember()">회원번호 생성</button>
+    <p style="font-size:13px; color:#666; margin-top:8px;">발급된 번호는 예약 페이지에서 인증에 사용됩니다.</p>
+  </div>
 
-<ul id="memberList"></ul>
+  <div class="card card-body">
+    <h3>프로그램 일정 등록</h3>
+    <input type="text" id="programTitle" placeholder="프로그램명">
+    <input type="text" id="programTime" placeholder="운영 시간 (예: 화 13:00~15:00)" style="margin-top:8px;">
+    <button class="btn" style="margin-top:10px;" onclick="addProgram()">일정 추가</button>
+  </div>
+</section>
+
+<section class="container grid" style="margin-top:20px;">
+  <div class="card card-body">
+    <h3>회원 목록</h3>
+    <ul id="memberList"></ul>
+  </div>
+  <div class="card card-body">
+    <h3>등록된 프로그램</h3>
+    <ul id="programList"></ul>
+  </div>
+</section>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

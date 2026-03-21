@@ -6,6 +6,11 @@ flex-direction:column;
 gap:16px;
 }
 
+#reservationFieldset[disabled]{
+opacity:.55;
+pointer-events:none;
+}
+
 #reservationForm input,
 #reservationForm select{
 
@@ -55,4 +60,12 @@ color:white;
 .time-slot.selected{
 background:#111;
 color:white;
+}
+
+#memberId{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:6px;
+font-size:14px;
 }

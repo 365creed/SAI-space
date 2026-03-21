@@ -35,18 +35,51 @@
 
 </header>
 
-<input type="text" id="memberId" placeholder="회원번호 입력">
-<button type="button" onclick="checkMember()">예약 진행</button>
+<section class="container" style="padding-top:24px;">
+  <div class="card" style="padding:20px;">
+    <h3 style="margin-bottom:8px;">회원번호 확인</h3>
+    <p style="font-size:14px; color:#666; margin-bottom:12px;">최초 방문자는 회원가입 후 회원번호 발급이 완료되어야 예약이 가능합니다.</p>
+    <input type="text" id="memberId" placeholder="회원번호 입력 (예: M1001)">
+    <button type="button" onclick="checkMember()" style="margin-top:10px;">예약 진행</button>
+    <p id="memberCheckStatus" style="font-size:13px; margin-top:10px; color:#1b63d6;"></p>
+  </div>
+</section>
 
 
 <section class="page-hero">
 <h2>공간 예약</h2>
+<p>공간 정보/시설/환불정책을 확인한 뒤 예약을 진행해주세요.</p>
 </section>
 
 
 <section class="container">
 
+<div class="card" style="padding:20px; margin-bottom:20px;">
+  <p style="font-size:12px; color:#666; margin-bottom:8px;">구성 참고: <a href="https://www.spacecloud.kr/space/48209" target="_blank" rel="noopener">스페이스클라우드 레퍼런스</a></p>
+  <h3 id="spaceTitle" style="margin-bottom:8px;">3층 큰강의실</h3>
+  <p id="spaceType" style="font-size:14px; color:#555;">공간유형: 강연/세미나 홀</p>
+  <p id="spaceArea" style="font-size:14px; color:#555;">공간면적: 약 45평</p>
+  <p id="spaceTime" style="font-size:14px; color:#555;">예약시간: 최소 1시간부터, 09:00 ~ 21:00</p>
+  <img id="spaceImage" src="assets/img/seminar.png" alt="선택 공간 이미지" style="margin-top:12px; border-radius:12px; max-height:260px; object-fit:cover;">
+</div>
+
+<div class="grid" style="margin-bottom:20px;">
+  <div class="card card-body">
+    <h3>시설안내</h3>
+    <p id="facilityText">빔프로젝터, 무선마이크, 냉난방, 와이파이</p>
+  </div>
+  <div class="card card-body">
+    <h3>유의사항</h3>
+    <p id="noticeText">음향 장비 사용 후 원위치, 종료 10분 전 정리 필수</p>
+  </div>
+  <div class="card card-body">
+    <h3>환불정책</h3>
+    <p id="refundText">이용 7일 전 100%, 3일 전 50%, 당일 환불 불가</p>
+  </div>
+</div>
+
 <form id="reservationForm">
+<fieldset id="reservationFieldset" disabled style="border:0; padding:0; margin:0;">
 
 <input type="text" name="name" placeholder="이름" required>
 
@@ -78,6 +111,7 @@
 예약 요청
 </button>
 
+</fieldset>
 </form>
 
 </section>
