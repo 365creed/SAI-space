@@ -1,8 +1,3 @@
-if (localStorage.getItem("admin") !== "true") {
-  alert("접근 불가");
-  location.href = "login.html";
-}
-
 let members = JSON.parse(localStorage.getItem("members")) || [];
 
 function createMember() {

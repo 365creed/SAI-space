@@ -24,30 +24,27 @@
 </h1>
 
 <nav class="nav">
-<a href="about.html">소개</a>
+<a href="index.html">홈</a>
 <a href="space.html">공간</a>
 <a href="program.html">프로그램</a>
 <a href="reservation.html">예약</a>
-<a href="location.html">위치</a>
+<a href="about.html">위치</a>
 </nav>
 
 </div>
 
 </header>
 
+<input type="text" id="memberId" placeholder="회원번호 입력">
+<button onclick="checkMember()">예약 진행</button>
+
+
 <section class="page-hero">
 <h2>공간 예약</h2>
-<p>관리자에게 발급받은 회원번호로 본인 확인 후 예약을 진행합니다.</p>
 </section>
 
-<section class="container member-gate" id="memberGate">
-<label for="memberId" class="sr-only">회원번호</label>
-<input type="text" id="memberId" name="memberId" placeholder="회원번호 입력" autocomplete="off">
-<button type="button" class="member-gate-btn" onclick="checkMember()">예약 진행</button>
-<p id="memberGateMsg" class="member-gate-msg" role="status"></p>
-</section>
 
-<section class="container reservation-form-wrap" id="reservationSection" hidden>
+<section class="container">
 
 <form id="reservationForm">
 
@@ -90,7 +87,6 @@
 
 <script src="js/calendar.js"></script>
 <script src="js/reservation.js"></script>
-<script src="js/main.js"></script>
 
 </body>
 </html>
