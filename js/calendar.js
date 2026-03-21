@@ -18,9 +18,9 @@ btn.innerText=hour+":00";
 btn.onclick=()=>{
 
 document.querySelectorAll(".time-slot")
-.forEach(b=>b.classList.remove("active"));
+.forEach(b=>b.classList.remove("selected"));
 
-btn.classList.add("active");
+btn.classList.add("selected");
 
 document.querySelector("input[name=time]").value=hour+":00";
 
