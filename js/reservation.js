@@ -1,10 +1,10 @@
-const TEST_MEMBER_ID = "M1001";
+const TEST_MEMBER_ID = "19840314";
 
 function ensureTestMember() {
   const key = "members";
   let members = JSON.parse(localStorage.getItem(key)) || [];
   if (!members.some((m) => m.id === TEST_MEMBER_ID)) {
-    members.push({ id: TEST_MEMBER_ID, name: "테스트(사전발급)", phone: "" });
+    members.push({ id: TEST_MEMBER_ID, name: "예약 테스트(사전등록)", phone: "" });
     localStorage.setItem(key, JSON.stringify(members));
   }
 }
