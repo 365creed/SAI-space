@@ -37,13 +37,15 @@
 
 </header>
 
-<section class="container" style="padding-top:24px;">
-  <div class="card" style="padding:20px;">
-    <h3 style="margin-bottom:8px;">회원번호 확인</h3>
-    <p style="font-size:14px; color:#666; margin-bottom:12px;">발급된 회원번호 인증 후에만 예약 양식과 공간 상세가 표시됩니다.</p>
-    <input type="text" id="memberId" placeholder="회원번호 입력 (예: 19840314)" autocomplete="off">
-    <button type="button" onclick="checkMember()" style="margin-top:10px;">예약 진행</button>
-    <p id="memberCheckStatus" style="font-size:13px; margin-top:10px; color:#1b63d6;"></p>
+<section class="container reservation-gate">
+  <div class="card reservation-member-card">
+    <h3 class="reservation-member-title">회원번호 확인</h3>
+    <p class="reservation-member-lead">발급된 회원번호 인증 후에만 예약 양식과 공간 상세가 표시됩니다.</p>
+    <div class="reservation-member-actions">
+      <input type="text" id="memberId" class="reservation-member-input" placeholder="회원번호 입력 (예: 19840314)" autocomplete="off">
+      <button type="button" class="btn-reservation-check" onclick="checkMember()">예약 진행</button>
+    </div>
+    <p id="memberCheckStatus" class="reservation-member-status"></p>
   </div>
 </section>
 
