@@ -1,0 +1,264 @@
+/* 프로그램 캘린더 */
+.prog-cal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  max-width: 100%;
+}
+
+.prog-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.prog-cal-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.prog-cal-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.prog-cal-nav-btn:hover {
+  background: #eee;
+}
+
+.prog-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.prog-cal-weekday {
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+  padding: 6px 0;
+}
+
+.prog-cal-daynum {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.prog-cal-cell {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  font-size: 12px;
+  padding: 4px;
+  text-align: center;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.prog-cal-cell--empty {
+  border: none;
+  background: transparent;
+}
+
+.prog-cal-cell--has {
+  background: #f0f6ff;
+  border-color: #c8d9f7;
+}
+
+.prog-cal-dots {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.prog-cal-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #1b63d6;
+}
+
+.program-room-block {
+  margin-top: 40px;
+}
+
+.program-room-block h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.program-room-block .program-room-lead {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.program-room-media {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.program-room-media img {
+  height: 160px;
+  object-fit: cover;
+}
+
+.program-apply-note {
+  font-size: 13px;
+  color: #1b63d6;
+  margin-top: 8px;
+}
+
+.hero-v2.hero-v2--home {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* 관리자: 좁은 목차형 레이아웃 */
+.admin-wrap {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-wrap .card.card-body {
+  padding: 18px 16px;
+}
+
+.admin-wrap h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.admin-wrap input,
+.admin-wrap select,
+.admin-wrap button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-wrap input,
+.admin-wrap select {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.admin-wrap .btn-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-wrap .btn-row .btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+.admin-wrap label.btn {
+  margin: 0;
+  line-height: normal;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #eee;
+  padding: 8px 6px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #f7f7f7;
+  font-weight: 600;
+}
+
+.admin-table .btn-tiny {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #c62828;
+  color: #fff;
+  cursor: pointer;
+}
+
+.admin-table .btn-tiny:hover {
+  opacity: 0.9;
+}
+
+.admin-member-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.admin-member-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+
+.admin-member-list li:last-child {
+  border-bottom: none;
+}
+
+.admin-stats {
+  font-size: 13px;
+  color: #444;
+}
+
+.admin-stats table {
+  width: 100%;
+  font-size: 12px;
+}
+
+.admin-stats td {
+  padding: 6px 4px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+@media (min-width: 900px) {
+  .program-calendars-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+}

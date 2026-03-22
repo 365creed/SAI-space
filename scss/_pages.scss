@@ -22,10 +22,17 @@
   background-color: #f5f3ef;
   background-image: var(--hero-bg, none);
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hero-v2.hero-v2--home {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .hero-overlay {
