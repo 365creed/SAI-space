@@ -1,5 +1,5 @@
-const ADMIN_ID = "sai-admin";
-const ADMIN_PASSWORD = "SAI-demo-2026";
+const ADMIN_ID = "btlm";
+const ADMIN_PASSWORD = "19840314";
 
 function login() {
   const id = document.getElementById("adminId").value.trim();
