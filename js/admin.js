@@ -3,8 +3,8 @@ if (localStorage.getItem("admin") !== "true") {
   location.href = "login.html";
 }
 
-let members = JSON.parse(localStorage.getItem("members")) || [];
-let programs = JSON.parse(localStorage.getItem("programSchedules")) || [];
+let members = [];
+let programs = [];
 
 function saveMembers() {
   localStorage.setItem("members", JSON.stringify(members));
@@ -76,5 +76,32 @@ function logout() {
   location.href = "login.html";
 }
 
-renderMembers();
-renderPrograms();
+async function mergeMembersFromData() {
+  try {
+    const res = await fetch("data/members.json", { cache: "no-cache" });
+    if (!res.ok) return;
+    const remote = await res.json();
+    if (!Array.isArray(remote)) return;
+    let local = JSON.parse(localStorage.getItem("members")) || [];
+    const seen = new Set(local.map((m) => m.id));
+    remote.forEach((m) => {
+      if (m.id && !seen.has(m.id)) {
+        local.push({ id: m.id, name: m.name || "", phone: m.phone || "" });
+        seen.add(m.id);
+      }
+    });
+    localStorage.setItem("members", JSON.stringify(local));
+  } catch (e) {
+    console.warn("members.json", e);
+  }
+}
+
+async function initAdmin() {
+  await mergeMembersFromData();
+  members = JSON.parse(localStorage.getItem("members")) || [];
+  programs = JSON.parse(localStorage.getItem("programSchedules")) || [];
+  renderMembers();
+  renderPrograms();
+}
+
+initAdmin();

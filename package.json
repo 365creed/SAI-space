@@ -1,0 +1,11 @@
+{
+  "name": "sai-space",
+  "private": true,
+  "scripts": {
+    "build:css": "sass scss/main.scss css/site.css --style=expanded --no-source-map",
+    "watch:css": "sass scss/main.scss css/site.css --watch --style=expanded --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}
