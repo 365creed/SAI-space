@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SAI Space | 관리자</title>
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/calendar-admin.css">
 </head>
 <body>
 <header class="header">
@@ -21,37 +22,76 @@
 
 <section class="page-hero">
   <h2>관리자 운영 페이지</h2>
-  <p>회원가입 승인/회원번호 발급과 프로그램 운영 일정을 관리합니다.</p>
+  <p>회원·프로그램 일정·접속 통계를 좁은 목록 형태로 관리합니다.</p>
 </section>
 
-<section class="container grid" style="margin-top:20px;">
-  <div class="card card-body">
+<div class="container admin-wrap" style="margin-top:16px;">
+
+  <section class="card card-body" style="margin-bottom:16px;">
     <h3>회원번호 발급</h3>
     <input type="text" id="memberName" placeholder="회원 이름">
-    <input type="text" id="memberPhone" placeholder="연락처 (선택)" style="margin-top:8px;">
-    <button class="btn" style="margin-top:10px;" onclick="createMember()">회원번호 생성</button>
-    <p style="font-size:13px; color:#666; margin-top:8px;">발급된 번호는 예약 페이지에서 인증에 사용됩니다.</p>
-  </div>
+    <input type="text" id="memberPhone" placeholder="연락처 (선택)">
+    <button type="button" class="btn" onclick="createMember()">회원번호 생성</button>
+    <p style="font-size:12px; color:#666; margin-top:8px;">발급된 번호는 예약 페이지 회원 인증에 사용됩니다.</p>
+  </section>
 
-  <div class="card card-body">
+  <section class="card card-body" style="margin-bottom:16px;">
+    <h3>회원 목록 · 엑셀(CSV)</h3>
+    <div class="btn-row">
+      <button type="button" class="btn" onclick="exportMembersCsv()">CSV 다운로드</button>
+      <label class="btn" style="display:inline-block; text-align:center; cursor:pointer; padding:12px 22px;">
+        CSV 업로드
+        <input type="file" id="memberCsvFile" accept=".csv,text/csv" style="display:none;" onchange="importMembersCsv(this)">
+      </label>
+    </div>
+    <p style="font-size:12px; color:#666; margin-top:8px;">첫 행: id,name,phone · 업로드 시 동일 id는 덮어쓰기, 없으면 추가됩니다.</p>
+    <ul id="memberList" class="admin-member-list"></ul>
+  </section>
+
+  <section class="card card-body" style="margin-bottom:16px;">
     <h3>프로그램 일정 등록</h3>
+    <p style="font-size:12px; color:#666; margin-bottom:6px;">캘린더에 표시할 날짜·공간·제목·시간을 등록합니다.</p>
+    <input type="date" id="programDate" required>
+    <select id="programSpace">
+      <option value="3F_BIG_LECTURE">3층 큰강의실</option>
+      <option value="2F_SMALL_LECTURE">2층 소강의실</option>
+      <option value="2F_SMALL_ROOM_1">2층 작은방 1</option>
+      <option value="2F_SMALL_ROOM_2">2층 작은방 2</option>
+      <option value="2F_SMALL_ROOM_3">2층 작은방 3</option>
+    </select>
     <input type="text" id="programTitle" placeholder="프로그램명">
-    <input type="text" id="programTime" placeholder="운영 시간 (예: 화 13:00~15:00)" style="margin-top:8px;">
-    <button class="btn" style="margin-top:10px;" onclick="addProgram()">일정 추가</button>
-  </div>
-</section>
+    <input type="text" id="programTime" placeholder="운영 시간 (예: 13:00~15:00)">
+    <button type="button" class="btn" onclick="addProgram()">일정 추가</button>
+  </section>
 
-<section class="container grid" style="margin-top:20px;">
-  <div class="card card-body">
-    <h3>회원 목록</h3>
-    <ul id="memberList"></ul>
-  </div>
-  <div class="card card-body">
-    <h3>등록된 프로그램</h3>
-    <ul id="programList"></ul>
-  </div>
-</section>
+  <section class="card card-body" style="margin-bottom:16px;">
+    <h3>등록된 프로그램 일정</h3>
+    <div class="admin-table-wrap">
+      <table class="admin-table" id="programTable">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>공간</th>
+            <th>프로그램</th>
+            <th>시간</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="programTableBody"></tbody>
+      </table>
+    </div>
+  </section>
 
+  <section class="card card-body admin-stats" style="margin-bottom:48px;">
+    <h3>페이지 접속 집계</h3>
+    <p style="font-size:12px; color:#666; margin-bottom:8px;">동일 브라우저 기준 로컬 집계입니다. 전체 방문은 대략적인 참고용입니다.</p>
+    <div id="statsPanel"></div>
+    <button type="button" class="btn" style="margin-top:10px;" onclick="resetStats()">통계 초기화</button>
+  </section>
+
+</div>
+
+<script src="js/track.js"></script>
 <script src="js/admin.js"></script>
 </body>
 </html>

@@ -40,7 +40,7 @@
     <h3 class="reservation-member-title">회원번호 확인</h3>
     <p class="reservation-member-lead">발급된 회원번호 인증 후에만 예약 양식과 공간 상세가 표시됩니다.</p>
     <div class="reservation-member-actions">
-      <input type="text" id="memberId" class="reservation-member-input" placeholder="회원번호 입력 (예: 19840314)" autocomplete="off">
+      <input type="text" id="memberId" class="reservation-member-input" placeholder="발급받은 회원번호를 입력하세요" autocomplete="off">
       <button type="button" class="btn-reservation-check" onclick="checkMember()">예약 진행</button>
     </div>
     <p id="memberCheckStatus" class="reservation-member-status"></p>
@@ -127,6 +127,7 @@
 </footer>
 
 
+<script src="js/track.js"></script>
 <script src="js/api.js"></script>
 <script src="js/calendar.js"></script>
 <script src="js/reservation.js"></script>

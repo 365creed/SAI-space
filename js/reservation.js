@@ -129,6 +129,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!form) return;
 
+  const params = new URLSearchParams(window.location.search);
+  const qSpace = params.get("space");
+  const qDate = params.get("date");
+  if (spaceSelect && qSpace && spaceData[qSpace]) {
+    spaceSelect.value = qSpace;
+  }
+  const dateInput = form.querySelector('input[name="date"]');
+  if (dateInput && qDate) {
+    dateInput.value = qDate;
+  }
+
   function setLockedPanel(show) {
     if (!locked) return;
     locked.hidden = !show;
@@ -156,6 +167,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let memberChecked = false;
   setLockedPanel(false);
+
+  if (params.get("from") === "program" && status) {
+    status.textContent = "프로그램에서 연결되었습니다. 회원번호 인증 후 예약을 진행하세요.";
+  }
 
   window.checkMember = () => {
     const id = memberInput ? memberInput.value.trim() : "";
