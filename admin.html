@@ -9,13 +9,13 @@
 </head>
 <body>
 <header class="header">
-  <div class="container">
+  <div class="container header-inner">
     <h1 class="logo"><a href="index.html">SAI Space Admin</a></h1>
-    <nav class="nav">
+    <nav class="nav" aria-label="관리자 메뉴">
       <a href="index.html">홈</a>
       <a href="reservation.html">예약</a>
       <a href="program.html">프로그램</a>
-      <a href="#" onclick="logout()">로그아웃</a>
+      <a href="#" onclick="logout(); return false;">로그아웃</a>
     </nav>
   </div>
 </header>

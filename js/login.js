@@ -1,24 +1,15 @@
+const ADMIN_ID = "sai-admin";
+const ADMIN_PASSWORD = "SAI-demo-2026";
+
 function login() {
-  const id = document.getElementById("adminId").value.trim() || "admin";
+  const id = document.getElementById("adminId").value.trim();
   const pass = document.getElementById("adminPass").value.trim();
-  if (!pass) {
-    alert("비밀번호를 입력하세요");
+  if (!id || !pass) {
+    alert("아이디와 비밀번호를 입력하세요");
     return;
   }
 
-  const authRaw = localStorage.getItem("adminAuth");
-
-  // 최초 1회: 입력한 정보로 관리자 계정 설정(코드에 비밀번호 하드코딩 없음)
-  if (!authRaw) {
-    localStorage.setItem("adminAuth", JSON.stringify({ id, password: pass }));
-    localStorage.setItem("admin", "true");
-    location.href = "admin.html";
-    return;
-  }
-
-  const auth = JSON.parse(authRaw);
-
-  if (id === auth.id && pass === auth.password) {
+  if (id === ADMIN_ID && pass === ADMIN_PASSWORD) {
     localStorage.setItem("admin", "true");
     location.href = "admin.html";
     return;

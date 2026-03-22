@@ -17,19 +17,21 @@
 
 <header class="header">
 
-<div class="container">
+<div class="container header-inner">
 
 <h1 class="logo">
 <a href="index.html">SAI Space</a>
 </h1>
 
-<nav class="nav">
+<nav class="nav" aria-label="주요 메뉴">
 <a href="index.html">홈</a>
 <a href="space.html">공간</a>
 <a href="program.html">프로그램</a>
 <a href="reservation.html">예약</a>
 <a href="about.html">위치</a>
 </nav>
+
+<a href="login.html" class="header-admin-entry" title="운영자 전용">운영</a>
 
 </div>
 
@@ -38,13 +40,14 @@
 <section class="container" style="padding-top:24px;">
   <div class="card" style="padding:20px;">
     <h3 style="margin-bottom:8px;">회원번호 확인</h3>
-    <p style="font-size:14px; color:#666; margin-bottom:12px;">최초 방문자는 회원가입 후 회원번호 발급이 완료되어야 예약이 가능합니다.</p>
-    <input type="text" id="memberId" placeholder="회원번호 입력 (예: M1001)">
+    <p style="font-size:14px; color:#666; margin-bottom:12px;">발급된 회원번호 인증 후에만 예약 양식과 공간 상세가 표시됩니다.</p>
+    <input type="text" id="memberId" placeholder="회원번호 입력 (예: M1001)" autocomplete="off">
     <button type="button" onclick="checkMember()" style="margin-top:10px;">예약 진행</button>
     <p id="memberCheckStatus" style="font-size:13px; margin-top:10px; color:#1b63d6;"></p>
   </div>
 </section>
 
+<div id="reservationLockedContent" class="reservation-locked" hidden>
 
 <section class="page-hero">
 <h2>공간 예약</h2>
@@ -115,6 +118,8 @@
 </form>
 
 </section>
+
+</div>
 
 
 <footer class="footer">
