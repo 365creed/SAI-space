@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600&display=swap');
 
 *{
 margin:0;
@@ -8,8 +8,8 @@ box-sizing:border-box;
 
 body{
 font-family:'Pretendard', sans-serif;
-background:#fafafa;
-color:#222;
+background:#f6f9ff;
+color:#1f2937;
 line-height:1.6;
 }
 
@@ -148,7 +148,7 @@ margin-right:auto;
 }
 
 .btn{
-background:#111;
+background:#1b63d6;
 color:white;
 padding:12px 22px;
 border-radius:6px;
@@ -274,7 +274,7 @@ color:#777;
 
 .cta{
 margin-top:80px;
-background:#111;
+background:#1b63d6;
 color:white;
 padding:80px 20px;
 text-align:center;
@@ -377,7 +377,7 @@ font-size:16px;
 
 .hero-v2--home .hero-overlay {
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.6) 100%);
+    linear-gradient(180deg, rgba(16, 24, 40, 0.45) 0%, rgba(16, 24, 40, 0.25) 45%, rgba(16, 24, 40, 0.38) 100%);
 }
 
 .hero-v2--home .hero-title {
@@ -387,8 +387,8 @@ font-size:16px;
   margin-left: auto;
   margin-right: auto;
   text-shadow:
-    0 2px 28px rgba(0, 0, 0, 0.75),
-    0 1px 6px rgba(0, 0, 0, 0.9);
+    0 2px 22px rgba(0, 0, 0, 0.55),
+    0 1px 6px rgba(0, 0, 0, 0.65);
 }
 
 .hero-v2--home .hero-sub {
@@ -396,7 +396,7 @@ font-size:16px;
   margin-left: auto;
   margin-right: auto;
   color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.65);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
 }
 
 /* 踰꾪듉 */
@@ -404,7 +404,7 @@ font-size:16px;
   display: inline-block;
   margin-top: 30px;
   padding: 14px 32px;
-  background: #111;
+  background: #1b63d6;
   color: #fff;
   border-radius: 999px;
   text-decoration: none;
@@ -586,7 +586,7 @@ font-size:16px;
 
 .map-btn {
   display: inline-block;
-  background: #111;
+  background: #1b63d6;
   color: #fff;
   padding: 12px 16px;
   border-radius: 999px;
@@ -678,7 +678,7 @@ font-size:14px;
 
 #reservationForm button{
 
-background:#111;
+background:#1b63d6;
 color:white;
 padding:14px;
 border-radius:6px;
@@ -709,12 +709,12 @@ background:white;
 }
 
 .time-slot:hover{
-background:#111;
+background:#1b63d6;
 color:white;
 }
 
 .time-slot.selected{
-background:#111;
+background:#1b63d6;
 color:white;
 }
 
@@ -776,7 +776,7 @@ width:100%;
 padding:14px 24px;
 border:none;
 border-radius:999px;
-background:#111;
+background:#1b63d6;
 color:#fff;
 font-size:15px;
 font-weight:600;
