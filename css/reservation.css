@@ -146,3 +146,50 @@ min-height:1.2em;
 .reservation-locked[hidden]{
 display:none !important;
 }
+
+/* Screen reader only */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* Facilities (icons + chips) */
+.facility-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+
+.facility-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#f7faff,#eef4ff);
+  border:1px solid #d8e4ff;
+  color:#1b63d6;
+  font-size:13px;
+  font-weight:600;
+  line-height:1;
+}
+
+.facility-icon{
+  width:18px;
+  height:18px;
+  flex-shrink:0;
+  color:inherit;
+}
+
+.facility-badge-text{
+  white-space:nowrap;
+}
+

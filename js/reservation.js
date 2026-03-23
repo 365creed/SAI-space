@@ -71,6 +71,172 @@ function mapSpacesJson(arr) {
   return o;
 }
 
+function normalizeFacilityToken(token) {
+  return String(token || "")
+    .trim()
+    .replace(/\s+/g, "")
+    .toLowerCase();
+}
+
+function facilityIconSvg(kind) {
+  // Keep SVGs inline to avoid missing assets.
+  switch (kind) {
+    case "wifi":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 9a12 12 0 0 1 14 0"></path>
+          <path d="M8.5 12.5a7 7 0 0 1 7 0"></path>
+          <circle cx="12" cy="18" r="1.3" fill="currentColor" stroke="none"></circle>
+        </svg>
+      `;
+    case "projector":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="12" rx="2"></rect>
+          <circle cx="12" cy="11" r="2.2" fill="currentColor" stroke="none"></circle>
+          <path d="M8 21h8"></path>
+        </svg>
+      `;
+    case "microphone":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"></path>
+          <path d="M19 11a7 7 0 0 1-14 0"></path>
+          <path d="M12 18v3"></path>
+        </svg>
+      `;
+    case "ac":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 14.5V6a2 2 0 0 0-4 0v8.5"></path>
+          <circle cx="12" cy="17" r="3" fill="currentColor" stroke="none"></circle>
+          <path d="M5 4l2 2"></path>
+          <path d="M19 4l-2 2"></path>
+        </svg>
+      `;
+    case "display":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+          <path d="M8 21h8"></path>
+        </svg>
+      `;
+    case "whiteboard":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+          <path d="M8 9h8"></path>
+          <path d="M8 13h6"></path>
+          <path d="M8 17h8"></path>
+        </svg>
+      `;
+    case "table":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="10" width="18" height="6" rx="2"></rect>
+          <path d="M6 16v4"></path>
+          <path d="M10 16v4"></path>
+          <path d="M14 16v4"></path>
+          <path d="M18 16v4"></path>
+        </svg>
+      `;
+    case "chair":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 6a3 3 0 0 1 3-3h0a3 3 0 0 1 3 3v8H9V6z"></path>
+          <path d="M9 14H6a2 2 0 0 0-2 2v4"></path>
+          <path d="M16 14h2a2 2 0 0 1 2 2v4"></path>
+        </svg>
+      `;
+    case "light":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18h6"></path>
+          <path d="M10 22h4"></path>
+          <path d="M8 14a6 6 0 1 1 8 0l-1 2H9l-1-2z"></path>
+        </svg>
+      `;
+    case "writing-board":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="6" width="16" height="14" rx="2"></rect>
+          <path d="M8 10h8"></path>
+          <path d="M8 14h6"></path>
+          <path d="M16 18l2 1"></path>
+        </svg>
+      `;
+    case "outlet":
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="7" y="2" width="10" height="20" rx="2"></rect>
+          <circle cx="11" cy="12" r="1.4" fill="currentColor" stroke="none"></circle>
+          <circle cx="15" cy="12" r="1.4" fill="currentColor" stroke="none"></circle>
+          <path d="M10 22h4"></path>
+        </svg>
+      `;
+    default:
+      return `
+        <svg class="facility-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 8v4"></path>
+          <path d="M12 16h.01"></path>
+        </svg>
+      `;
+  }
+}
+
+function resolveFacilityBadgeMeta(token) {
+  const t = normalizeFacilityToken(token);
+  const raw = String(token || "").trim();
+
+  if (!raw) return { label: "", icon: facilityIconSvg("default") };
+
+  if (t.includes("와이파이") || t.includes("wi-fi") || t.includes("wifi")) return { label: "와이파이", icon: facilityIconSvg("wifi") };
+  if (t.includes("빔프로젝터")) return { label: "빔프로젝터", icon: facilityIconSvg("projector") };
+  if (t.includes("무선마이크") || t.includes("마이크")) return { label: "무선마이크", icon: facilityIconSvg("microphone") };
+  if (t.includes("냉난방")) return { label: "냉난방", icon: facilityIconSvg("ac") };
+  if (t.includes("tv") || t.includes("모니터")) return { label: raw, icon: facilityIconSvg("display") };
+  if (t.includes("화이트보드")) return { label: "화이트보드", icon: facilityIconSvg("whiteboard") };
+  if (t.includes("테이블")) return { label: "테이블", icon: facilityIconSvg("table") };
+  if (t.includes("의자")) return { label: "의자", icon: facilityIconSvg("chair") };
+  if (t.includes("조명")) return { label: raw.includes("개별") ? "개별 조명" : "조명", icon: facilityIconSvg("light") };
+  if (t.includes("필기보드")) return { label: "필기보드", icon: facilityIconSvg("writing-board") };
+  if (t.includes("전원") || t.includes("콘센트")) return { label: "전원 콘센트", icon: facilityIconSvg("outlet") };
+
+  return { label: raw, icon: facilityIconSvg("default") };
+}
+
+function renderFacilityBadges(container, facilityText) {
+  if (!container) return;
+
+  const rawText = String(facilityText || "");
+  const tokens = rawText
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  container.innerHTML = "";
+
+  const seen = new Set();
+  tokens.forEach((token) => {
+    const norm = normalizeFacilityToken(token);
+    if (!norm || seen.has(norm)) return;
+    seen.add(norm);
+
+    const meta = resolveFacilityBadgeMeta(token);
+    if (!meta.label) return;
+
+    const badge = document.createElement("span");
+    badge.className = "facility-badge";
+    badge.setAttribute("role", "listitem");
+    badge.title = meta.label;
+    badge.innerHTML = meta.icon + '<span class="facility-badge-text"></span>';
+    const textEl = badge.querySelector(".facility-badge-text");
+    if (textEl) textEl.textContent = meta.label;
+    container.appendChild(badge);
+  });
+}
+
 async function mergeMembersFromData() {
   try {
     const res = await fetch("data/members.json", { cache: "no-cache" });
@@ -155,7 +321,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("spaceArea").textContent = info.area;
     document.getElementById("spaceTime").textContent = info.time;
     document.getElementById("spaceImage").src = info.image;
-    document.getElementById("facilityText").textContent = info.facility;
+    const facilityTextEl = document.getElementById("facilityText");
+    if (facilityTextEl) facilityTextEl.textContent = info.facility || "";
+    const facilityBadgesEl = document.getElementById("facilityBadges");
+    renderFacilityBadges(facilityBadgesEl, info.facility);
     document.getElementById("noticeText").textContent = info.notice;
     document.getElementById("refundText").textContent = info.refund;
   }
