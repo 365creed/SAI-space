@@ -880,3 +880,15 @@ min-height:1.2em;
 .reservation-locked[hidden]{
 display:none !important;
 }
+
+/* 방문자: 프로그램 페이지 분위기 */
+body.page-program .page-hero{
+background:linear-gradient(135deg,#f2f8ff 0%,#fffbf7 45%,#f7f9ff 100%);
+border-bottom:1px solid rgba(27,99,214,0.07);
+}
+body.page-program .section-title{
+letter-spacing:-0.02em;
+}
+body.page-program .prog-cal{
+box-shadow:0 12px 40px rgba(27,99,214,0.07);
+}

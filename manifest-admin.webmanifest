@@ -1,0 +1,11 @@
+{
+  "name": "SAI Space 운영",
+  "short_name": "SAI 운영",
+  "description": "SAI Space 프로그램·회원 관리",
+  "start_url": "./admin.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f9ff",
+  "theme_color": "#1b63d6",
+  "icons": []
+}

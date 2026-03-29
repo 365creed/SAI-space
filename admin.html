@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1b63d6">
 <title>SAI Space | 관리자</title>
+<link rel="manifest" href="manifest-admin.webmanifest">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/calendar-admin.css">
 </head>
-<body>
+<body class="page-admin">
 <header class="header">
   <div class="container header-inner">
     <h1 class="logo"><a href="index.html">SAI Space Admin</a></h1>
@@ -20,12 +22,18 @@
   </div>
 </header>
 
-<section class="page-hero">
+<section class="page-hero page-hero--admin">
   <h2>관리자 운영 페이지</h2>
-  <p>회원·프로그램 일정·접속 통계를 좁은 목록 형태로 관리합니다.</p>
+  <p>달력에서 전체 일정을 확인하고, 날짜를 누르면 아래에서 일회 일정을 바로 등록할 수 있습니다.</p>
 </section>
 
 <div class="container admin-wrap" style="margin-top:16px;">
+
+  <section class="card card-body admin-cal-section" style="margin-bottom:16px;">
+    <h3>스케줄 달력 (전체)</h3>
+    <p style="font-size:12px; color:#666; margin-bottom:12px;">정기 프로그램(매주)과 일회 일정이 합쳐져 표시됩니다. 칸을 누르면 해당 날짜가 선택되고 「일회 프로그램 일정」 입력란으로 이동합니다.</p>
+    <div id="admin-cal-host" data-admin-calendar="1" aria-label="관리자 스케줄 달력"></div>
+  </section>
 
   <section class="card card-body" style="margin-bottom:16px;">
     <h3>회원번호 발급</h3>
@@ -49,8 +57,73 @@
   </section>
 
   <section class="card card-body" style="margin-bottom:16px;">
-    <h3>프로그램 일정 등록</h3>
-    <p style="font-size:12px; color:#666; margin-bottom:6px;">캘린더에 표시할 날짜·공간·제목·시간을 등록합니다.</p>
+    <h3>정기 프로그램 (매주 반복)</h3>
+    <p style="font-size:12px; color:#666; margin-bottom:10px;">교육·건강·체험 분야 정기 프로그램을 텍스트 목록으로 반영했습니다. 첫 방문 시 자동으로 불러오며, 여기서 수정·일괄 등록·주차별 제한을 관리할 수 있습니다.</p>
+
+    <div style="display:grid; gap:10px; max-width:100%;">
+      <label style="font-size:13px; font-weight:600;">분류</label>
+      <select id="fxCategory">
+        <option value="교육">교육</option>
+        <option value="건강">건강</option>
+        <option value="체험">체험</option>
+        <option value="기타">기타</option>
+      </select>
+      <input type="text" id="fxProgramName" placeholder="프로그램명">
+      <span style="font-size:12px; color:#666;">요일 (복수 선택)</span>
+      <div id="fxWeekdays" class="fx-weekdays"></div>
+      <input type="text" id="fxTime" placeholder="시간 (예: 14:00~15:30, 오전, 오후, 시간미정)">
+      <input type="text" id="fxManager" placeholder="담당자">
+      <input type="text" id="fxPhone" placeholder="연락처">
+      <label style="font-size:13px; font-weight:600;">공간</label>
+      <select id="fxSpace">
+        <option value="2F_SMALL_LECTURE">2층 소강의실</option>
+        <option value="3F_BIG_LECTURE">3층 큰강의실</option>
+        <option value="2F_SMALL_ROOM_1">2층 작은방 1</option>
+        <option value="2F_SMALL_ROOM_2">2층 작은방 2</option>
+        <option value="2F_SMALL_ROOM_3">2층 작은방 3</option>
+      </select>
+      <span style="font-size:12px; color:#666;">주차 제한 (해당 요일이 그 달의 몇 번째인지, 비우면 매주)</span>
+      <div class="fx-weeknums" style="display:flex; flex-wrap:wrap; gap:10px; font-size:13px;">
+        <label><input type="checkbox" class="fx-week-num" value="1"> 1주차</label>
+        <label><input type="checkbox" class="fx-week-num" value="2"> 2주차</label>
+        <label><input type="checkbox" class="fx-week-num" value="3"> 3주차</label>
+        <label><input type="checkbox" class="fx-week-num" value="4"> 4주차</label>
+        <label><input type="checkbox" class="fx-week-num" value="5"> 5주차</label>
+      </div>
+      <label style="font-size:13px;"><input type="checkbox" id="fxCalendarSkip"> 캘린더에 표시 안 함 (요일·시간 미정 등)</label>
+      <button type="button" class="btn" onclick="addFixedSchedule()">고정 스케줄 추가</button>
+    </div>
+
+    <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+      <button type="button" class="btn" onclick="importClubSeedReplace()">기본 목록으로 덮어쓰기</button>
+      <button type="button" class="btn" onclick="exportFixedJson()">고정 스케줄 JSON 내보내기</button>
+    </div>
+    <p style="font-size:12px; color:#666; margin-top:10px;">JSON 일괄 반영: 아래에 배열을 붙여넣고 버튼을 누르면 전체가 교체됩니다.</p>
+    <textarea id="fixedBulkJson" rows="8" style="width:100%; max-width:100%; box-sizing:border-box; padding:10px; font-size:12px; margin-top:6px;" placeholder='[{"id":"...","category":"교육","programName":"한문","weekdays":[2,4],"time":"14:00~15:30",...}]'></textarea>
+    <button type="button" class="btn" style="margin-top:8px;" onclick="bulkImportFixedJson()">JSON 일괄 반영</button>
+
+    <div class="admin-table-wrap" style="margin-top:16px;">
+      <table class="admin-table" id="fixedScheduleTable">
+        <thead>
+          <tr>
+            <th>분류</th>
+            <th>프로그램</th>
+            <th>요일</th>
+            <th>시간</th>
+            <th>담당</th>
+            <th>연락처</th>
+            <th>주차</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="fixedScheduleBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card card-body" id="admin-oneoff-form" style="margin-bottom:16px;">
+    <h3>일회 프로그램 일정</h3>
+    <p style="font-size:12px; color:#666; margin-bottom:6px;">특정 하루만 열리는 일정입니다. 위 달력에서 날짜를 누르면 날짜가 채워집니다.</p>
     <input type="date" id="programDate" required>
     <select id="programSpace">
       <option value="3F_BIG_LECTURE">3층 큰강의실</option>
@@ -91,6 +164,9 @@
 
 </div>
 
+<script src="js/program-schedule-seed.js"></script>
+<script src="js/fixed-schedule-lib.js"></script>
+<script src="js/admin-calendar.js"></script>
 <script src="js/track.js"></script>
 <script src="js/admin.js"></script>
 </body>

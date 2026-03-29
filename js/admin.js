@@ -98,6 +98,183 @@ function deleteProgram(id) {
   renderPrograms();
 }
 
+const WD_LABEL = { 0: "일", 1: "월", 2: "화", 3: "수", 4: "목", 5: "금", 6: "토" };
+
+function buildWeekdayBoxes() {
+  const el = document.getElementById("fxWeekdays");
+  if (!el || el.dataset.built === "1") return;
+  el.dataset.built = "1";
+  [
+    [1, "월"],
+    [2, "화"],
+    [3, "수"],
+    [4, "목"],
+    [5, "금"],
+    [6, "토"],
+    [0, "일"],
+  ].forEach(([val, lab]) => {
+    const labEl = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.value = String(val);
+    labEl.appendChild(cb);
+    labEl.appendChild(document.createTextNode(" " + lab));
+    el.appendChild(labEl);
+  });
+}
+
+function addFixedSchedule() {
+  if (!window.FixedScheduleLib) {
+    alert("스케줄 모듈을 불러오지 못했습니다.");
+    return;
+  }
+  const category = document.getElementById("fxCategory").value;
+  const programName = document.getElementById("fxProgramName").value.trim();
+  const time = document.getElementById("fxTime").value.trim();
+  const managerName = document.getElementById("fxManager").value.trim();
+  const phone = document.getElementById("fxPhone").value.trim();
+  const spaceKey = document.getElementById("fxSpace").value;
+  const calendarSkip = document.getElementById("fxCalendarSkip").checked;
+
+  const wdBoxes = document.querySelectorAll("#fxWeekdays input[type=checkbox]:checked");
+  const weekdays = Array.from(wdBoxes)
+    .map((c) => parseInt(c.value, 10))
+    .filter((n) => !Number.isNaN(n));
+
+  const wnBoxes = document.querySelectorAll(".fx-week-num:checked");
+  let weeksInMonth = Array.from(wnBoxes)
+    .map((c) => parseInt(c.value, 10))
+    .filter((n) => n >= 1 && n <= 5);
+  if (weeksInMonth.length === 0) weeksInMonth = null;
+
+  if (!programName) {
+    alert("프로그램명을 입력하세요.");
+    return;
+  }
+  if (!calendarSkip && weekdays.length === 0) {
+    alert("요일을 선택하거나 「캘린더에 표시 안 함」을 체크하세요.");
+    return;
+  }
+
+  const rules = FixedScheduleLib.getFixedRulesFromStorage();
+  const rule = FixedScheduleLib.normalizeRule({
+    id: genId("fx"),
+    category,
+    programName,
+    weekdays,
+    time,
+    managerName,
+    phone,
+    spaceKey,
+    weeksInMonth,
+    calendarSkip,
+  });
+  rules.push(rule);
+  FixedScheduleLib.saveFixedRules(rules);
+  renderFixedSchedules();
+
+  document.getElementById("fxProgramName").value = "";
+  document.getElementById("fxTime").value = "";
+  document.getElementById("fxManager").value = "";
+  document.getElementById("fxPhone").value = "";
+  document.getElementById("fxCalendarSkip").checked = false;
+  wdBoxes.forEach((c) => {
+    c.checked = false;
+  });
+  document.querySelectorAll(".fx-week-num").forEach((c) => {
+    c.checked = false;
+  });
+}
+
+function deleteFixedRule(id) {
+  if (!confirm("이 고정 스케줄을 삭제할까요?")) return;
+  const rules = FixedScheduleLib.getFixedRulesFromStorage().filter((r) => r.id !== id);
+  FixedScheduleLib.saveFixedRules(rules);
+  renderFixedSchedules();
+}
+
+function renderFixedSchedules() {
+  const tbody = document.getElementById("fixedScheduleBody");
+  if (!tbody || !window.FixedScheduleLib) return;
+  const rules = FixedScheduleLib.getFixedRulesFromStorage();
+  tbody.innerHTML = "";
+  if (rules.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = '<td colspan="8" style="text-align:center;color:#888;">고정 스케줄이 없습니다.</td>';
+    tbody.appendChild(tr);
+    return;
+  }
+
+  rules.forEach((r) => {
+    const tr = document.createElement("tr");
+    for (let i = 0; i < 8; i++) tr.appendChild(document.createElement("td"));
+    tr.cells[0].textContent = r.category || "";
+    tr.cells[1].textContent = r.programName || r.clubName || "";
+    tr.cells[2].textContent = (r.weekdays || []).map((d) => WD_LABEL[d] || d).join(", ") || (r.calendarSkip ? "—" : "");
+    tr.cells[3].textContent = r.time || "";
+    tr.cells[4].textContent = r.managerName || "";
+    tr.cells[5].textContent = r.phone || "";
+    tr.cells[6].textContent =
+      r.weeksInMonth && r.weeksInMonth.length ? r.weeksInMonth.join(",") + "주차" : "매주";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn-tiny";
+    btn.textContent = "삭제";
+    btn.addEventListener("click", () => deleteFixedRule(r.id));
+    tr.cells[7].appendChild(btn);
+    tbody.appendChild(tr);
+  });
+}
+
+function importClubSeedReplace() {
+  if (!confirm("기본 정기 프로그램 목록으로 덮어씁니다. 계속할까요?")) return;
+  const seed = window.PROGRAM_SCHEDULE_SEED || window.CLUB_SCHEDULE_SEED;
+  if (!seed || !seed.length) {
+    alert("시드 데이터가 없습니다.");
+    return;
+  }
+  const rules = seed.map((r) => FixedScheduleLib.normalizeRule(r)).filter(Boolean);
+  FixedScheduleLib.saveFixedRules(rules);
+  renderFixedSchedules();
+  alert(`${rules.length}건 반영되었습니다.`);
+}
+
+function bulkImportFixedJson() {
+  const ta = document.getElementById("fixedBulkJson");
+  const raw = ta && ta.value.trim();
+  if (!raw) {
+    alert("JSON 배열을 입력하세요.");
+    return;
+  }
+  let arr;
+  try {
+    arr = JSON.parse(raw);
+  } catch (e) {
+    alert("JSON 파싱 실패: " + e.message);
+    return;
+  }
+  if (!Array.isArray(arr)) {
+    alert("최상위는 배열이어야 합니다.");
+    return;
+  }
+  const rules = arr.map((r) => FixedScheduleLib.normalizeRule(r)).filter(Boolean);
+  FixedScheduleLib.saveFixedRules(rules);
+  renderFixedSchedules();
+  ta.value = "";
+  alert(`${rules.length}건 반영되었습니다.`);
+}
+
+function exportFixedJson() {
+  if (!window.FixedScheduleLib) return;
+  const rules = FixedScheduleLib.getFixedRulesFromStorage();
+  const blob = new Blob([JSON.stringify(rules, null, 2)], { type: "application/json;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sai-fixed-program-schedules.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
 function renderMembers() {
   const list = document.getElementById("memberList");
   if (!list) return;
@@ -302,11 +479,6 @@ async function initAdmin() {
   }
   await mergeMembersFromData();
   try {
-    members = JSON.parse(localStorage.getItem("members")) || [];
-  } catch {
-    members = [];
-  }
-  try {
     programs = JSON.parse(localStorage.getItem("programSchedules")) || [];
   } catch {
     programs = [];
@@ -320,8 +492,11 @@ async function initAdmin() {
     dateEl.value = new Date().toISOString().slice(0, 10);
   }
 
+  buildWeekdayBoxes();
   renderMembers();
   renderPrograms();
+  renderFixedSchedules();
+  if (typeof window.renderAdminScheduleCalendar === "function") window.renderAdminScheduleCalendar();
   renderStats();
 }
 

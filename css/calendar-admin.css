@@ -1,3 +1,11 @@
+/* 관리자: 정기 프로그램 요일 선택 */
+.fx-weekdays {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+}
+
 /* 프로그램 캘린더 */
 .prog-cal {
   background: #fff;
@@ -261,4 +269,69 @@
     gap: 20px;
     align-items: start;
   }
+}
+
+/* 관리자: 전체 스케줄 달력 */
+.admin-cal-section .prog-cal {
+  max-width: 100%;
+}
+
+.admin-cal .admin-cal-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 92px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 6px 4px 8px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  background: #fafbfd;
+  color: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.admin-cal .admin-cal-cell:hover {
+  border-color: rgba(27, 99, 214, 0.4);
+  background: #fff;
+}
+
+.admin-cal .prog-cal-cell--has {
+  background: linear-gradient(180deg, #eef5ff, #fff);
+}
+
+.admin-cal-evlist {
+  margin-top: 4px;
+  width: 100%;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #334155;
+}
+
+.admin-cal-ev {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.admin-cal-ev--more {
+  color: #1b63d6;
+  font-weight: 600;
+}
+
+.admin-cal-cell--pad {
+  min-height: 92px;
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.page-hero--admin {
+  background: linear-gradient(135deg, #e8f1fc 0%, #f8fbff 100%);
+  border-bottom: 1px solid rgba(27, 99, 214, 0.1);
 }

@@ -1,30 +1,4 @@
 (function () {
-  function getPrograms() {
-    try {
-      return JSON.parse(localStorage.getItem("programSchedules")) || [];
-    } catch {
-      return [];
-    }
-  }
-
-  function getProgramsForMonth(year, monthIndex) {
-    if (window.FixedScheduleLib && typeof window.FixedScheduleLib.getMergedProgramsForMonth === "function") {
-      return window.FixedScheduleLib.getMergedProgramsForMonth(year, monthIndex);
-    }
-    return getPrograms();
-  }
-
-  function filterPrograms(list, filter) {
-    return list.filter((p) => {
-      if (!p || !p.date) return false;
-      if (filter === "all") return true;
-      if (filter === "big") return p.spaceKey === "3F_BIG_LECTURE";
-      if (filter === "small_lecture") return p.spaceKey === "2F_SMALL_LECTURE";
-      if (filter === "small_rooms") return /^2F_SMALL_ROOM_[123]$/.test(p.spaceKey || "");
-      return true;
-    });
-  }
-
   function monthMatrix(year, monthIndex) {
     const first = new Date(year, monthIndex, 1);
     const startPad = first.getDay();
@@ -37,21 +11,26 @@
 
   function eventsOnDate(list, year, monthIndex, day) {
     const iso = `${year}-${String(monthIndex + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-    return list.filter((p) => p.date === iso);
+    return list.filter((p) => p && p.date === iso);
   }
 
-  function render(container, filter) {
-    if (!container) return;
+  function truncate(s, n) {
+    const t = String(s || "");
+    return t.length > n ? t.slice(0, n - 1) + "…" : t;
+  }
+
+  function render(container) {
+    if (!container || !window.FixedScheduleLib) return;
 
     let year = new Date().getFullYear();
     let month = new Date().getMonth();
     if (container.dataset.year) year = parseInt(container.dataset.year, 10);
     if (container.dataset.month) month = parseInt(container.dataset.month, 10) - 1;
 
-    const programs = filterPrograms(getProgramsForMonth(year, month), filter);
+    const programs = FixedScheduleLib.getMergedProgramsForMonth(year, month);
 
     const wrap = document.createElement("div");
-    wrap.className = "prog-cal";
+    wrap.className = "prog-cal admin-cal";
 
     const nav = document.createElement("div");
     nav.className = "prog-cal-nav";
@@ -81,7 +60,7 @@
       }
       container.dataset.year = String(year);
       container.dataset.month = String(month + 1);
-      render(container, filter);
+      render(container);
     }
 
     prev.addEventListener("click", () => go(-1));
@@ -100,27 +79,43 @@
 
     const cells = monthMatrix(year, month);
     cells.forEach((day) => {
-      const cell = document.createElement("div");
-      cell.className = "prog-cal-cell";
       if (day === null) {
-        cell.classList.add("prog-cal-cell--empty");
-        grid.appendChild(cell);
+        const empty = document.createElement("div");
+        empty.className = "prog-cal-cell prog-cal-cell--empty admin-cal-cell--pad";
+        grid.appendChild(empty);
         return;
       }
+
+      const cell = document.createElement("button");
+      cell.type = "button";
+      cell.className = "prog-cal-cell admin-cal-cell";
+
       const num = document.createElement("span");
       num.className = "prog-cal-daynum";
       num.textContent = String(day);
       cell.appendChild(num);
+
       const evs = eventsOnDate(programs, year, month, day);
+      const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
       if (evs.length) {
         cell.classList.add("prog-cal-cell--has");
-        const dots = document.createElement("div");
-        dots.className = "prog-cal-dots";
-        evs.slice(0, 4).forEach(() => {
-          const s = document.createElement("span");
-          dots.appendChild(s);
+        const listEl = document.createElement("div");
+        listEl.className = "admin-cal-evlist";
+        evs.slice(0, 4).forEach((e) => {
+          const row = document.createElement("div");
+          row.className = "admin-cal-ev";
+          const rawTitle = (e.title || "").replace(/\s*·\s*프로그램\s*$/, "");
+          row.textContent = truncate(rawTitle || e.title, 14);
+          listEl.appendChild(row);
         });
-        cell.appendChild(dots);
+        if (evs.length > 4) {
+          const more = document.createElement("div");
+          more.className = "admin-cal-ev admin-cal-ev--more";
+          more.textContent = `+${evs.length - 4}`;
+          listEl.appendChild(more);
+        }
+        cell.appendChild(listEl);
         cell.title = evs
           .map((e) => {
             let line = `${e.title}${e.time ? " · " + e.time : ""}`;
@@ -128,26 +123,30 @@
             return line;
           })
           .join("\n");
-        cell.style.cursor = "pointer";
-        cell.addEventListener("click", () => {
-          const first = evs[0];
-          const sp = encodeURIComponent(first.spaceKey || "3F_BIG_LECTURE");
-          const dt = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-          window.location.href = `reservation.html?date=${dt}&space=${sp}&from=program`;
-        });
+      } else {
+        cell.title = `${iso} — 일정 등록`;
       }
+
+      cell.addEventListener("click", () => {
+        const dateEl = document.getElementById("programDate");
+        if (dateEl) dateEl.value = iso;
+        const titleEl = document.getElementById("programTitle");
+        if (titleEl) {
+          titleEl.focus();
+          titleEl.select();
+        }
+        const form = document.getElementById("admin-oneoff-form");
+        if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
       grid.appendChild(cell);
     });
     wrap.appendChild(grid);
-
     container.replaceChildren(wrap);
   }
 
   function renderAll() {
-    document.querySelectorAll("[data-calendar]").forEach((el) => {
-      const f = el.getAttribute("data-calendar") || "all";
-      render(el, f);
-    });
+    document.querySelectorAll("[data-admin-calendar]").forEach((el) => render(el));
   }
 
   document.addEventListener("DOMContentLoaded", renderAll);
@@ -160,5 +159,5 @@
     if (document.visibilityState === "visible") renderAll();
   });
 
-  window.refreshProgramCalendars = renderAll;
+  window.renderAdminScheduleCalendar = renderAll;
 })();
